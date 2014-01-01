@@ -1,12 +1,11 @@
 #!/usr/bin/perl -w
 ###########################################################################################
 
-#use lib "/usr/local/nagios/libexec";
+#use lib "/usr/local/nagios/libexec"; this is for nagios source installs
 use lib "/usr/lib/nagios/plugins";
 use utils qw(%ERRORS);
 use Getopt::Long;
 use DBI;
-#use Mysql;
 use Math::Round;
 
 my $debug = "no";
@@ -98,15 +97,6 @@ sub CtoF { my $c = shift; $c =~ s/[^\d\.]//g; return (9/5)*($c+32); }
 check_options();
 # ###############################################################################################################################################################################
 my $date = ` date +"%Y%m%d"`;
-# ## MySQL Stuff ################################################################################################################################################################
-#$connect = Mysql->connect($lhost, $database, $user, $pw) || die "Connection to: $database failed $ERRORS{\"UNKNOWN\"}";
-#$connect -> selectdb($database);
-# ################################################################################################
-#my $query_current_previous_routes = "SELECT routes, routes_raw from $type WHERE mgmt_ip = \"$o_host\"";
-#my $execute_query_current_previous_routes = $connect -> query($query_current_previous_routes);
-#my @current_previous_routes_array = $execute_query_current_previous_routes -> fetchrow;
-# ################################################################################################
-
 if($type eq 'C'){$standard = "Celcius";};
 if($type eq 'F'){$standard = "Farenheit";};
 
@@ -139,7 +129,7 @@ my @checkFileArray = split(" ",$checkFile);
 	}
 
 my $size = @checkFileArray;
-$data = $checkFileArray[$size-1];  # all we need is the last array value
+$data = $checkFileArray[$size-1];  # most of what we need is the last array value
 if($debug eq "yes"){ print "data1 = $data\n"}
 
 # filter string
