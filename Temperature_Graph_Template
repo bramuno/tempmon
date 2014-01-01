@@ -67,7 +67,7 @@
 		<name>Temperature Data Template</name>
 		<ds>
 			<t_name>on</t_name>
-			<name>poopy temperature</name>
+			<name>snoopy temperature</name>
 			<data_source_path>&lt;path_rra&gt;/localhost_temps_data_source_8.rrd</data_source_path>
 			<data_input_id>hash_030024463b87d3d36063861426012c25979adc</data_input_id>
 			<t_rra_id></t_rra_id>
@@ -80,7 +80,7 @@
 		<items>
 			<hash_080024d833081888d0d6994b2e9c80ee0f91fc>
 				<t_data_source_name>on</t_data_source_name>
-				<data_source_name>poopy</data_source_name>
+				<data_source_name>snoopy</data_source_name>
 				<t_rrd_minimum></t_rrd_minimum>
 				<rrd_minimum>0</rrd_minimum>
 				<t_rrd_maximum></t_rrd_maximum>
@@ -97,7 +97,7 @@
 			<item_000>
 				<data_input_field_id>hash_07002469109d222ace1b75d6889ba94a281001</data_input_field_id>
 				<t_value>on</t_value>
-				<value>poopy</value>
+				<value>snoopy</value>
 			</item_000>
 			<item_001>
 				<data_input_field_id>hash_0700246bfcc736d94024d80459c685f9e2d3be</data_input_field_id>
