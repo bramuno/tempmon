@@ -114,6 +114,7 @@ my $checkFile = undef;
 
 my $data = undef;
 my $loop = 0;
+my @checkFileArray = ();
 do{
 open(CURRENT, "< $filename") or die "Could not open file '$filename' $!";
 {
@@ -121,7 +122,7 @@ open(CURRENT, "< $filename") or die "Could not open file '$filename' $!";
         $checkFile = <CURRENT>;  # place contents in this variable
 }
 close CURRENT;
-my @checkFileArray = split(" ",$checkFile);
+@checkFileArray = split(" ",$checkFile);
 	if($debug eq "yes"){ 
 		for($a=0;$a<@checkFileArray;$a++){
 			print "checkFileArray[$a] = $checkFileArray[$a]\n"; 
