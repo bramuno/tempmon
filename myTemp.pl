@@ -6,8 +6,8 @@
 # for use with Raspberry Pi
 ########################################################################################### 
 
-#use lib "/usr/local/nagios/libexec"; use this is you installed nagios from source
-use lib "/usr/lib/nagios/plugins";
+#use lib "/usr/local/nagios/libexec";   # use this if you installed nagios from source
+use lib "/usr/lib/nagios/plugins";      # use this if you installed nagios from repos
 use utils qw(%ERRORS);
 use Getopt::Long;
 use Math::Round;
