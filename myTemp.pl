@@ -1,11 +1,15 @@
 #!/usr/bin/perl -w
 ###########################################################################################
+# Temperature Monitor script
+# written by: Brian Ramuno
+# http://collectivenothing.blogspot.com/2014/01/home-temperature-monitor-notification.html
+# for use with Raspberry Pi
+########################################################################################### 
 
-#use lib "/usr/local/nagios/libexec"; this is for nagios source installs
+#use lib "/usr/local/nagios/libexec"; use this is you installed nagios from source
 use lib "/usr/lib/nagios/plugins";
 use utils qw(%ERRORS);
 use Getopt::Long;
-use DBI;
 use Math::Round;
 
 my $debug = "no";
@@ -39,7 +43,7 @@ print <<EOT;
 		Name of zone (or kennel)	
 	-d, --debug=yes
 		print data for command line debugging (optional)
-	-p, --process=nagios
+	-p, --process=nagios/cacti
 EOT
 }
 # ####################################################################################################################################################################################
@@ -91,7 +95,6 @@ if ( $type eq "F" || $type eq "C"  ) {
         print_usage();
         exit $ERRORS{"UNKNOWN"}};	
 }
-sub CtoF { my $c = shift; $c =~ s/[^\d\.]//g; return (9/5)*($c+32); }
 
 # ###############################################################################################################################################################################
 check_options();
@@ -115,42 +118,43 @@ my $checkFile = undef;
 my $data = undef;
 my $loop = 0;
 my @checkFileArray = ();
+my $size = undef;
+
+## retry if bad reading is detected
 do{
-open(CURRENT, "< $filename") or die "Could not open file '$filename' $!";
-{
-        local $/;  # read all contents of opened file
-        $checkFile = <CURRENT>;  # place contents in this variable
-}
-close CURRENT;
-@checkFileArray = split(" ",$checkFile);
-	if($debug eq "yes"){ 
-		for($a=0;$a<@checkFileArray;$a++){
-			print "checkFileArray[$a] = $checkFileArray[$a]\n"; 
-		}
+	open(CURRENT, "< $filename") or die "Could not open file '$filename' $!";
+	{
+	        local $/;  # read all contents of opened file
+	        $checkFile = <CURRENT>;  # place contents in this variable
 	}
-
-my $size = @checkFileArray;
-$data = $checkFileArray[$size-1];  # most of what we need is the last array value
-if($debug eq "yes"){ print "data1 = $data\n"}
-
-# filter string
-$data =~ s/t=//g;
-if($debug eq "yes"){ print "data2 = $data\n"}
-
-if( ($data < -20 && $data > 80000) || $data == 0 ){ $loop = $loop +1; }else{ $loop = 15; }
+	close CURRENT;
+	@checkFileArray = split(" ",$checkFile);
+		if($debug eq "yes"){ 
+			for($a=0;$a<@checkFileArray;$a++){
+				print "checkFileArray[$a] = $checkFileArray[$a]\n"; 
+			}
+		}
+	
+	$size = @checkFileArray;
+	$data = $checkFileArray[$size-1];  # most of what we need is the last array value
+	if($debug eq "yes"){ print "data1 = $data\n"}
+	
+	# filter string
+	$data =~ s/t=//g;
+	if($debug eq "yes"){ print "data2 = $data\n"}
+	
+	if( $data < -20 || $data > 80000 || $data == 0 ){ $loop = $loop +1; }else{ $loop = 15; }
 } until($loop==15);
 
 # quit if sensor is offline
-if( ($data < -20 && $data > 80000) || $data == 0 ){
+if( $data < -20 || $data > 80000 || $data == 0 ){
         print "connection to $zone sensor is offline.\n";
         exit $ERRORS{"UNKNOWN"};
 }
-if( $data == 0 && $checkFileArray[11] eq "NO" ){
+if( $checkFileArray[11] eq "NO" ){
         print "connection to $zone sensor is offline.\n";
         exit $ERRORS{"UNKNOWN"};
 }
-
-
 
 # add decimal point
 ######################################
