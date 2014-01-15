@@ -52,13 +52,13 @@ sub check_options {
  Getopt::Long::Configure ("bundling");
  GetOptions (
 	 'h'     => \$help,    'help'         		 =>      \$help,
-	 'x:s'     => \$minimum,    'minimum'          =>      \$minimum,
-	 'y:s'     => \$maximum,    'maximum'          =>      \$maximum,
-	 'f:s'     => \$folder,    'folder'        =>      \$folder,
-	 't:s'     => \$type,    'type'        =>      \$type,
-	 'z:s'     => \$zone,    'zone'        =>      \$zone,
-         'p:s'     => \$process,    'process'        =>    \$process,
-	 'd:s'   => \$debug,    'debug'        		 =>      \$debug		 
+	 'x:s'     => \$minimum,    'minimum:s'          =>      \$minimum,
+	 'y:s'     => \$maximum,    'maximum:s'          =>      \$maximum,
+	 'f:s'     => \$folder,    'folder:s'        =>      \$folder,
+	 't:s'     => \$type,    'type:s'        =>      \$type,
+	 'z:s'     => \$zone,    'zone:s'        =>      \$zone,
+         'p:s'     => \$process,    'process:s'        =>    \$process,
+	 'd:s'   => \$debug,    'debug:s'        		 =>      \$debug		 
 	    );
 		
 if (defined ($help)) {
