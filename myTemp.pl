@@ -143,11 +143,11 @@ do{
 	$data =~ s/t=//g;
 	if($debug eq "yes"){ print "data2 = $data\n"}
 	
-	if( $data < -20 || $data > 80000 || $data == 0 ){ $loop = $loop +1; }else{ $loop = 15; }
+	if( $data < -55 || $data > 80000 || $data == 0 ){ $loop = $loop +1; }else{ $loop = 15; }
 } until($loop==15);
 
 # quit if sensor is offline
-if( $data < -20 || $data > 80000 || $data == 0 ){
+if( $data < -55 || $data > 80000 || $data == 0 ){
         print "connection to $zone sensor is offline.\n";
         exit $ERRORS{"UNKNOWN"};
 }
