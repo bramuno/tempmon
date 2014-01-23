@@ -175,30 +175,30 @@ my $MinWarningLevel = $minimum-5;
 my $MaxWarningLevel = $maximum+5;
 	if($debug eq "yes"){ print "use = $use\nwarning level = $MinWarningLevel\nMaxWarningLevel = $MaxWarningLevel\n "}
 
-
-if($process eq "nagios"){
-
-if( $use > $minimum  && $use < $maximum ){
-		print "Temperature: $use degrees $standard. Threshold:  $minimum-$maximum degrees $standard.   Everything is ok.\n";
-		exit $ERRORS{"OK"};	
-	}elsif( $use > $MinWarningLevel && $use <= $minimum ){
-		print "WARNING-Temperature: $use degrees $standard. Temperature is outside desired range!  Please check $zone kennel.\n";
-		exit $ERRORS{"WARNING"};	
-	}elsif( $use > $maximum && $use <= $MaxWarningLevel ){
-		print "WARNING-Temperature: $use degrees $standard. Temperature is outside desired range!  Please check $zone kennel.\n";
-		exit $ERRORS{"WARNING"};
-	}elsif( $use > $MaxWarningLevel || $use < $MinWarningLevel ){
-		print "CRITICAL-Temperature: $use degrees $standard. Temperature is way outside desired range!  Please check $zone kennel.\n";	
-		exit $ERRORS{"CRITICAL"};	
-	}else{
-		print "something went wrong!\n";
-		exit $ERRORS{"UNKNOWN"};	
-	}
+if($Fdata < -40 || $Fdata > 160 || $Fdata == 0){ die; # this prevents cacti from accepting any false data
 }else{
-
-	print "$use ";
+	if($process eq "nagios"){
+	if( $use > $minimum  && $use < $maximum ){
+			print "Temperature: $use degrees $standard. Threshold:  $minimum-$maximum degrees $standard.   Everything is ok.\n";
+			exit $ERRORS{"OK"};	
+		}elsif( $use > $MinWarningLevel && $use <= $minimum ){
+			print "WARNING-Temperature: $use degrees $standard. Temperature is outside desired range!  Please check $zone kennel.\n";
+			exit $ERRORS{"WARNING"};	
+		}elsif( $use > $maximum && $use <= $MaxWarningLevel ){
+			print "WARNING-Temperature: $use degrees $standard. Temperature is outside desired range!  Please check $zone kennel.\n";
+			exit $ERRORS{"WARNING"};
+		}elsif( $use > $MaxWarningLevel || $use < $MinWarningLevel ){
+			print "CRITICAL-Temperature: $use degrees $standard. Temperature is way outside desired range!  Please check $zone kennel.\n";	
+			exit $ERRORS{"CRITICAL"};	
+		}else{
+			print "something went wrong!\n";
+			exit $ERRORS{"UNKNOWN"};	
+		}
+	}else{
+	
+		print "$use ";
+	}
 }
-
 
 
 
