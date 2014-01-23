@@ -175,7 +175,7 @@ my $MinWarningLevel = $minimum-5;
 my $MaxWarningLevel = $maximum+5;
 	if($debug eq "yes"){ print "use = $use\nwarning level = $MinWarningLevel\nMaxWarningLevel = $MaxWarningLevel\n "}
 
-if($Fdata < -40 || $Fdata > 160 || $Fdata == 0){ die; # this prevents cacti from accepting any false data
+if($Fdata < -40 || $Fdata > 160 || $data == 0){ die; # this prevents cacti from accepting any false data
 }else{
 	if($process eq "nagios"){
 	if( $use > $minimum  && $use < $maximum ){
