@@ -12,7 +12,7 @@
 			<width>500</width>
 			<t_slope_mode></t_slope_mode>
 			<slope_mode>on</slope_mode>
-			<t_auto_scale></t_auto_scale>plugins
+			<t_auto_scale></t_auto_scale>
 			<auto_scale>on</auto_scale>
 			<t_auto_scale_opts></t_auto_scale_opts>
 			<auto_scale_opts>2</auto_scale_opts>
@@ -80,7 +80,7 @@
 		<items>
 			<hash_080024d833081888d0d6994b2e9c80ee0f91fc>
 				<t_data_source_name>on</t_data_source_name>
-				<data_source_name>snoopy</data_source_name>
+				<data_source_name>zone_name</data_source_name>
 				<t_rrd_minimum></t_rrd_minimum>
 				<rrd_minimum>0</rrd_minimum>
 				<t_rrd_maximum></t_rrd_maximum>
@@ -97,7 +97,7 @@
 			<item_000>
 				<data_input_field_id>hash_07002469109d222ace1b75d6889ba94a281001</data_input_field_id>
 				<t_value>on</t_value>
-				<value>snoopy</value>
+				<value>zone_name</value>
 			</item_000>
 			<item_001>
 				<data_input_field_id>hash_0700246bfcc736d94024d80459c685f9e2d3be</data_input_field_id>
@@ -107,7 +107,7 @@
 			<item_002>
 				<data_input_field_id>hash_07002433091c7dfe7ba0eef9b6824fe2018634</data_input_field_id>
 				<t_value>on</t_value>
-				<value>28-00000535dfb3</value>
+				<value></value>
 			</item_002>
 			<item_003>
 				<data_input_field_id>hash_07002433ec9747d133da014e70112ddf5235e7</data_input_field_id>
@@ -124,7 +124,7 @@
 	<hash_030024463b87d3d36063861426012c25979adc>
 		<name>temperature</name>
 		<type_id>1</type_id>
-		<input_string>/plugins/myTemp.pl -x &lt;MIN&gt; -y &lt;MAX&gt; -f &lt;FOLDER&gt; -t &lt;TYPE&gt; -z &lt;ZONE&gt;</input_string>
+		<input_string>/plugins/myTemp.pl -x &quot;&lt;MIN&gt;&quot; -y &quot;&lt;MAX&gt;&quot; -f &quot;&lt;FOLDER&gt;&quot; -t &lt;TYPE&gt; -z &quot;&lt;ZONE&gt;&quot;</input_string>
 		<fields>
 			<hash_070024334985a1db2d13c6350f2ede453d4520>
 				<name>MINIMUM</name>
