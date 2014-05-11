@@ -12,7 +12,7 @@
 			<width>500</width>
 			<t_slope_mode></t_slope_mode>
 			<slope_mode>on</slope_mode>
-			<t_auto_scale></t_auto_scale>
+			<t_auto_scale></t_auto_scale>plugins
 			<auto_scale>on</auto_scale>
 			<t_auto_scale_opts></t_auto_scale_opts>
 			<auto_scale_opts>2</auto_scale_opts>
@@ -124,7 +124,7 @@
 	<hash_030024463b87d3d36063861426012c25979adc>
 		<name>temperature</name>
 		<type_id>1</type_id>
-		<input_string>/nagios/myTemp.pl -x &lt;MIN&gt; -y &lt;MAX&gt; -f &lt;FOLDER&gt; -t &lt;TYPE&gt; -z &lt;ZONE&gt;</input_string>
+		<input_string>/plugins/myTemp.pl -x &lt;MIN&gt; -y &lt;MAX&gt; -f &lt;FOLDER&gt; -t &lt;TYPE&gt; -z &lt;ZONE&gt;</input_string>
 		<fields>
 			<hash_070024334985a1db2d13c6350f2ede453d4520>
 				<name>MINIMUM</name>
