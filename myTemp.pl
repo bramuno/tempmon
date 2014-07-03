@@ -171,30 +171,32 @@ $Fdata = round($Fdata);
 my $use = undef;
 if($standard eq "Farenheit"){ $use = $Fdata }
 if($standard eq "Celcius"){ $use = $Cdata }
-my $MinWarningLevel = $minimum-5;
-my $MaxWarningLevel = $maximum+5;
+my $MinWarningLevel = $minimum+5;
+my $MaxWarningLevel = $maximum-5;
 	if($debug eq "yes"){ print "use = $use\nwarning level = $MinWarningLevel\nMaxWarningLevel = $MaxWarningLevel\n "}
 
 if($Fdata < -40 || $Fdata > 160 || $data == 0){ die; # this prevents cacti from accepting any false data
 }else{
 	if($process eq "nagios"){
-	if( $use > $minimum  && $use < $maximum ){
-			print "Temperature: $use degrees $standard. Threshold:  $minimum-$maximum degrees $standard.   Everything is ok.\n";
-			exit $ERRORS{"OK"};	
-		}elsif( $use > $MinWarningLevel && $use <= $minimum ){
-			print "WARNING-Temperature: $use degrees $standard. Temperature is outside desired range!  Please check $zone kennel.\n";
-			exit $ERRORS{"WARNING"};	
-		}elsif( $use > $maximum && $use <= $MaxWarningLevel ){
-			print "WARNING-Temperature: $use degrees $standard. Temperature is outside desired range!  Please check $zone kennel.\n";
-			exit $ERRORS{"WARNING"};
-		}elsif( $use > $MaxWarningLevel || $use < $MinWarningLevel ){
-			print "CRITICAL-Temperature: $use degrees $standard. Temperature is way outside desired range!  Please check $zone kennel.\n";	
-			exit $ERRORS{"CRITICAL"};	
-		}else{
-			print "something went wrong!\n";
-			exit $ERRORS{"UNKNOWN"};	
-		}
-	}else{
+	
+	if( $use > $MinWarningLevel  && $use < $MaxWarningLevel ){
+                        print "Temperature: $use degrees $standard. Threshold:  $minimum-$maximum degrees $standard. A-OK$
+                        exit $ERRORS{"OK"};
+                }elsif( $use <= $MinWarningLevel && $use > $minimum ){
+                        print "WARNING-Temperature: $use degrees $standard. Temperature is outside desired range!  Please$
+                        exit $ERRORS{"WARNING"};
+                }elsif( $use < $maximum && $use >= $MaxWarningLevel ){
+                        print "WARNING-Temperature: $use degrees $standard. Temperature is outside desired range!  Please$
+                        exit $ERRORS{"WARNING"};
+                }elsif( $use > $maximum || $use < $minimum ){
+                        print "CRITICAL-Temperature: $use degrees $standard. Temperature is way outside desired range!  P$
+                        exit $ERRORS{"CRITICAL"};
+                }else{
+                        print "something went wrong!\n";
+                        exit $ERRORS{"UNKNOWN"};
+                        }
+        }else{
+
 	
 		print "$use ";
 	}
